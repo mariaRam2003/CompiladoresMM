@@ -1,16 +1,16 @@
-(* Lexer para Gramática No. 1 - Expresiones aritméticas simples para variables *)
+(* Lexer para Gramática No. 3 - Variación expresiones aritméticas simples *)
 
 (* Introducir cualquier header aqui *)
 
 let delim = [' ''\t''\n']
 let ws = delim+
-let letter = ['A'-'Z''a'-'z']
-let digit = ['0'-'9']
-let id = letter(letter|digit)*
+let digit = ["0123456789"]
+let digits = digit+
+let number = digits(.digits)?('E'['+''-']?digits)?
 
-rule tokens = 
-    ws
-  | id        { return ID }               (* Cambie por una accion valida, que devuelva el token *)
+rule tokens =
+    ws        { return WHITESPACE }               (* Cambie por una acción válida, que devuelva el token *)
+  | number    { return NUMBER }
   | '+'       { return PLUS }
   | '*'       { return TIMES }
   | '('       { return LPAREN }
