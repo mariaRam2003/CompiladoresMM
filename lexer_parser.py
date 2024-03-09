@@ -1,4 +1,3 @@
-import re
 from graphviz import Digraph
 
 class RegularExpression:
@@ -68,9 +67,23 @@ class YALexLexer:
                 self._parse_section(section)
 
     def _split_sections(self, content):
-        # Dividir el contenido en secciones basadas en {header}, {entrypoint}, {trailer}, etc.
-        # Utilizamos expresiones regulares para esto
-        return re.split(r'\n\s*{(?:header|trailer|rule)}\s*\n', content)
+        # Dividir el contenido en secciones basadas en líneas en blanco
+        sections = []
+        current_section = []
+        for line in content.split('\n'):
+            line = line.strip()
+            if not line:
+                # Agregar la sección actual a la lista de secciones
+                if current_section:
+                    sections.append('\n'.join(current_section))
+                    current_section = []
+            else:
+                # Agregar la línea actual a la sección actual
+                current_section.append(line)
+        # Agregar la última sección (si existe)
+        if current_section:
+            sections.append('\n'.join(current_section))
+        return sections
 
     def _parse_section(self, section):
         # Analizar una sección específica del archivo YALex
