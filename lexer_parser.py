@@ -28,7 +28,7 @@ class TreeNode:
         self.id = TreeNode.latest_id
 
     def make_tree(self):
-        # No es necesario especificar 'node [shape=plaintext]' ya que se aplicará a todo el gráfico
+        # Método para construir el árbol de expresión
         if self.left:
             TreeNode.tree_graph.edge(self.value, self.left.value)
             self.left.make_tree()
@@ -39,14 +39,14 @@ class TreeNode:
 
     @staticmethod
     def _render_tree():
+        # Método para renderizar el árbol de expresión
         TreeNode.tree_graph.render('out/expression_tree', view=True)
 
     def print_tree(self):
-        # Agregamos la declaración 'digraph G {' antes de dibujar el árbol
+        # Método para imprimir el árbol de expresión
         TreeNode.tree_graph.graph_attr['rankdir'] = 'TB'  # Opcional: para orientar el árbol verticalmente
         TreeNode.tree_graph.node(self.value, shape='plaintext')  # Especificamos que los nodos son de forma plaintext
         self.make_tree()
-        # TreeNode.tree_graph.append('}')  # Esta línea no es necesaria y causa el error
         self._render_tree()
 
 
@@ -56,6 +56,7 @@ class YALexLexer:
         self.tokens = []
 
     def tokenize(self):
+        # Método para tokenizar el archivo lexer.yal
         with open(self.filename, 'r') as file:
             content = file.read()
 
@@ -67,7 +68,7 @@ class YALexLexer:
                 self._parse_section(section)
 
     def _split_sections(self, content):
-        # Dividir el contenido en secciones basadas en líneas en blanco
+        # Método para dividir el contenido del archivo en secciones
         sections = []
         current_section = []
         for line in content.split('\n'):
@@ -86,7 +87,7 @@ class YALexLexer:
         return sections
 
     def _parse_section(self, section):
-        # Analizar una sección específica del archivo YALex
+        # Método para analizar una sección específica del archivo YALex
         # Dividimos la sección en líneas y eliminamos las líneas en blanco
         lines = [line.strip() for line in section.split('\n') if line.strip()]
 
@@ -109,6 +110,7 @@ class YALexLexer:
                 self.tokens.append(TokenDefinition(token_name, regexp, action))
 
     def build_expression_tree(self):
+        # Método para construir el árbol de expresión
         root = TreeNode('Root')
         for token in self.tokens:
             current_node = root
@@ -134,14 +136,18 @@ class YALexLexer:
         return root
 
     def display_tokens(self):
+        # Método para mostrar los tokens
         for token in self.tokens:
             print("Token:", token.name)
             print("Regular Expression:", token.regexp.value)
             print("Action:", token.action.value if token.action else None)
             print()
 
+# Crear una instancia de YALexLexer y realizar el análisis léxico
 lexer = YALexLexer('lexer.yal')
 lexer.tokenize()
+# Mostrar los tokens extraídos del archivo
 lexer.display_tokens()
+# Construir y mostrar el árbol de expresión
 tree_root = lexer.build_expression_tree()
 tree_root.print_tree()
