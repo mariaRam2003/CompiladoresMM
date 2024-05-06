@@ -1,4 +1,4 @@
-(* La sección {header} es opcional
+(* La sección {header} es opcional *)
 
 (* Definiendo los tokens a usar en este archivo *)
 
@@ -10,7 +10,7 @@ let ws = delim+
 let letter = ['a'-'z' 'A'-'Z']
 
 (* Segundo token: expresión regular que acepte números *)
-let digit = ['0'-'9'
+let digit = ['0'-'9']
 
 (* Tercer token: hacer un digito *)
 let digits = digit+
@@ -36,7 +36,7 @@ rule rule gettoken =
     | "FOR" {return "FOR"}
     | "+" {return "SUMA"}
     | "-" {return "RESTA"}
-    | "* {return "MULTIPLICACION"}
+    | "*" {return "MULTIPLICACION"}
     | "/" {return "DIVISION"}
     | "(" {return "PARENTESIS_IZQUIERDO"}
     | ")" {return "PARENTESIS_DERECHO"}

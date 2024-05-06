@@ -2,7 +2,6 @@ from yalex.Grammar import *
 from Automatas.EstadosLR import *
 import copy
 import sys
-import pydot
 
 new_limit = 9000  # Nuevo límite de recursión deseado
 sys.setrecursionlimit(new_limit)
@@ -916,82 +915,82 @@ def siguiente(no_terminal, gramatica):
     
     # print("No terminales: ", no_terminales)
 
-grammar = Grammar([
-    ["E", "E + T"],
-    ["E", "T"],
-    ["T", "T * F"],
-    ["T", "F"],
-    ["F", "( E )"],
-    ["F", "id"]
-]) # Gramática a utilizar.
+# grammar = Grammar([
+#     ["E", "E + T"],
+#     ["E", "T"],
+#     ["T", "T * F"],
+#     ["T", "F"],
+#     ["F", "( E )"],
+#     ["F", "id"]
+# ]) # Gramática a utilizar.
 
-tabla = construir_automata_LR0(grammar)
-
-
-# print(tabla)
-
-graph = pydot.Dot(graph_type='digraph')
-
-# Creando los nodos.
-nodes = set()
-for lista in tabla:
-    #print(lista)
-
-        #print(tupla[0])
-
-    # Convertir cada lista en la posición 0 de la lista a tupla si en caso no lo es.
-    if type(lista[0]) == tuple:
-        #nodes.add(lista[0])
-        pass
-    elif type(lista[0]) == list:
-        tupla_general0 = tuple(tuple(lista) for lista in lista[0])
-
-        #print(tupla_general0)
-        nodes.add(tupla_general0)
-
-    # Convertir cada lista en la posición 2 de la lista a tupla si en caso no lo es.
-    if type(lista[2]) == tuple:
-        pass
-    elif type(lista[2]) == list:
-        tupla_general2 = tuple(tuple(lista) for lista in lista[2])
-
-        #print(tupla_general2)
-        nodes.add(tupla_general2)
-
-# Agregando los nodos a la estructura de datos.
-for node in nodes:
-
-    #print("Nodo: ", node)
-
-    graph.add_node(pydot.Node(str(node)))
-
-# Haciendo las conexiones.
-for lista in tabla:
-
-    tupla0 = lista[0]
-    tupla2 = lista[2]
-    etiqueta = lista[1]
-
-    # print("Tupla0: ", tupla0)
-    # print("Tupla2: ", tupla2)
-    # print("Etiqueta: ", etiqueta)
+# tabla = construir_automata_LR0(grammar)
 
 
-    # Conversión de la lista[0] en caso de que sea necesario.
-    if type(lista[0]) == tuple:
-        tupla0 = lista[0]
-    elif type(lista[0]) == list:
-        tupla0 = tuple(tuple(lista) for lista in lista[0])
+# # print(tabla)
 
-    # Conversión de la lista[2] en caso de que sea necesario.
-    if type(lista[2]) == tuple:
-        tupla2 = lista[2]
-    elif type(lista[2]) == list:
-        tupla2 = tuple(tuple(lista) for lista in lista[2])
+# graph = pydot.Dot(graph_type='digraph')
 
-    graph.add_edge(pydot.Edge(str(tupla0), str(tupla2), label=str(etiqueta)))
+# # Creando los nodos.
+# nodes = set()
+# for lista in tabla:
+#     #print(lista)
 
-    # Poniendo el grafo de manera vertical (no recomendable ya que no se ve bien).
-    # graph.set_rankdir("LR")
+#         #print(tupla[0])
 
-    graph.write_png('Gramática1.png')
+#     # Convertir cada lista en la posición 0 de la lista a tupla si en caso no lo es.
+#     if type(lista[0]) == tuple:
+#         #nodes.add(lista[0])
+#         pass
+#     elif type(lista[0]) == list:
+#         tupla_general0 = tuple(tuple(lista) for lista in lista[0])
+
+#         #print(tupla_general0)
+#         nodes.add(tupla_general0)
+
+#     # Convertir cada lista en la posición 2 de la lista a tupla si en caso no lo es.
+#     if type(lista[2]) == tuple:
+#         pass
+#     elif type(lista[2]) == list:
+#         tupla_general2 = tuple(tuple(lista) for lista in lista[2])
+
+#         #print(tupla_general2)
+#         nodes.add(tupla_general2)
+
+# # Agregando los nodos a la estructura de datos.
+# for node in nodes:
+
+#     #print("Nodo: ", node)
+
+#     graph.add_node(pydot.Node(str(node)))
+
+# # Haciendo las conexiones.
+# for lista in tabla:
+
+#     tupla0 = lista[0]
+#     tupla2 = lista[2]
+#     etiqueta = lista[1]
+
+#     # print("Tupla0: ", tupla0)
+#     # print("Tupla2: ", tupla2)
+#     # print("Etiqueta: ", etiqueta)
+
+
+#     # Conversión de la lista[0] en caso de que sea necesario.
+#     if type(lista[0]) == tuple:
+#         tupla0 = lista[0]
+#     elif type(lista[0]) == list:
+#         tupla0 = tuple(tuple(lista) for lista in lista[0])
+
+#     # Conversión de la lista[2] en caso de que sea necesario.
+#     if type(lista[2]) == tuple:
+#         tupla2 = lista[2]
+#     elif type(lista[2]) == list:
+#         tupla2 = tuple(tuple(lista) for lista in lista[2])
+
+#     graph.add_edge(pydot.Edge(str(tupla0), str(tupla2), label=str(etiqueta)))
+
+#     # Poniendo el grafo de manera vertical.
+#     #graph.set_rankdir("LR")
+
+#     graph.write_png('GramáticaA1.png')

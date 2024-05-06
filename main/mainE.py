@@ -4,13 +4,8 @@ from io import StringIO
 import pydot
 from yalex.Grammar import *
 
-yapar = "YAPar2.txt"  # Variable que guarda el nombre del yapar.
-# yapar = "YAPar4.txt"  # Variable que guarda el nombre del yapar.
-# yapar = "slr-1.yalp"  # Variable que guarda el nombre del yapar.
-
-
+yapar = "slr-1.yalp"  # Variable que guarda el nombre del yapar.
 yalex = "slr-1.yal"  # Variable que guarda el nombre del yalex.
-
 
 lista_tk = []  # Tokens del yalex.
 lista_tkyp = []  # Tokens del yapar.
@@ -166,20 +161,20 @@ with open(yapar) as y:
                 # Extrayendo la cadena de texto que contiene las variables con la palabra IGNORE.
                 cadena_ignore = line[line.find("IGNORE") + 6:].strip()
 
-                print("Cadena: ", cadena_ignore)
+                # print("Cadena: ", cadena_ignore)
 
                 # Separando los tokens a ignorar en una lista.
-                # tokens_a_ignorar = [tok.strip() for tok in cadena_ignore.split(' ')]
+                tokens_a_ignorar = [tok.strip() for tok in cadena_ignore.split(' ')]
 
                 # Saliendo del ciclo para no procesar el resto del archivo.
                 break
 
-        # print("Tokens a ignorar: ", tokens_a_ignorar)
+        print("Tokens a ignorar: ", tokens_a_ignorar)
 
         # Quitando esos tokens de la lista lista_tkyp.
-        # for token in tokens_a_ignorar:
-        #    if token in lista_tkyp:
-        #        lista_tkyp.remove(token)
+        for token in tokens_a_ignorar:
+            if token in lista_tkyp:
+                lista_tkyp.remove(token)
 
         print("Tokens a operar en la gramática: ", lista_tkyp)
 
