@@ -12,8 +12,17 @@ rule tokens =
     ws        { return WHITESPACE }
   | id        { return ID }               (* Cambie por una acción válida, que devuelva el token *)
   | '+'       { return PLUS }
+  | '-'       { return MINUS }
+  | '/'       { return DIV }
+  | '1'       { return NUM }
   | '*'       { return TIMES }
   | '('       { return LPAREN }
   | ')'       { return RPAREN }
+  | 'a'       { return A }
+  | 'b'       { return B }
+  | 'c'       { return C }
+  | 'd'       { return D }
+  | 'g'       { return G }
+  | 'h'       { return H }
 
 (* Introducir cualquier trailer aqui *)
