@@ -4,7 +4,7 @@ from errors.Errors import *
 from ShuntingYard.parse_tree_builder import *
 from errors.ErrorsInFile import *
 import re
-from Simulator import *
+from SimulatorA import *
 
 tabla = {} # Tabla para guardar las declaraciones con let.
 archivo = "../examples/ex3.txt"
