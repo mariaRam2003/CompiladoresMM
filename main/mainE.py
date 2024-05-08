@@ -4,7 +4,8 @@ from io import StringIO
 import pydot
 from yalex.Grammar import *
 
-yapar = "slr-1.yalp"  # Variable que guarda el nombre del yapar.
+yapar = "YAPar4.txt"
+# yapar = "slr-1.yalp"  # Variable que guarda el nombre del yapar.
 yalex = "slr-1.yal"  # Variable que guarda el nombre del yalex.
 
 lista_tk = []  # Tokens del yalex.

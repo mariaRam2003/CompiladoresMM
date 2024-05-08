@@ -7,13 +7,23 @@ let ws = delim+
 let letter = ['A'-'Z''a'-'z']
 let digit = ['0'-'9']
 let id = letter(letter|digit)*
+let number = digit+
 
-rule tokens = 
+rule tokens =
     ws        { return WHITESPACE }
-  | id        { return ID }               (* Cambie por una acción válida, que devuelva el token *)
+  | id        { return ID }
+  | number    { return NUMBER }
   | '+'       { return PLUS }
+  | '-'       { return MINUS }
   | '*'       { return TIMES }
+  | '/'       { return DIV }
   | '('       { return LPAREN }
   | ')'       { return RPAREN }
+  | 'A'       { return A }
+  | 'B'       { return B }
+  | 'C'       { return C }
+  | 'D'       { return D }
+  | 'G'       { return G }
+  | 'H'       { return H }
 
 (* Introducir cualquier trailer aqui *)

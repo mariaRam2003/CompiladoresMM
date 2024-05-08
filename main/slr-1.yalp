@@ -2,7 +2,7 @@
 /* Sigue la gramática SLR: */
 /* E → E + T | T */
 /* T → T ∗ F | F */
-/* F → ( E ) | id 
+/* F → ( E ) | id */
 
 %token ID
 %token PLUS

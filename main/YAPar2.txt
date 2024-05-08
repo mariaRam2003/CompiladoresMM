@@ -1,3 +1,6 @@
+/* Configuración del parser para gramática No.1 */
+
+
 %token ID
 %token PLUS
 %token MINUS
