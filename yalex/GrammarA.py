@@ -1,6 +1,6 @@
 import pydot
 import ast
-from Grammar import *
+from yalex.Grammar import *
 import json
 
 
