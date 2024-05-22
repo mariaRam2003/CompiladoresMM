@@ -155,9 +155,9 @@ def primero(valor, grammar, terminals):
         terminals (list): Lista de símbolos terminales.
 
     Returns:
-        list: Conjunto de primeros.
+        set: Conjunto de primeros.
     """
-    final = []
+    final = set()
     stack = []
     reached = []
 
@@ -165,14 +165,14 @@ def primero(valor, grammar, terminals):
     reached.append(valor)
 
     if valor in terminals:
-        return stack
+        return {valor}  # Return as a set
     else:
         while len(stack) != 0:
             evaluating = stack.pop(0)
             for production in grammar:
                 if production[0] == evaluating:
                     if production[2] in terminals:
-                        final.append(production[2])
+                        final.add(production[2])
                     else:
                         if production[2] not in stack and production[2] not in reached:
                             stack.append(production[2])
@@ -210,7 +210,8 @@ def siguiente(symbol, grammar, start_symbol, terminals):
                     if next_symbol in terminals:
                         follow_set.add(next_symbol)
                     else:
-                        follow_set |= primero(next_symbol, grammar, terminals)
+                        next_first_set = set(primero(next_symbol, grammar, terminals))  # Convert list to set
+                        follow_set |= next_first_set
                         if '' in follow_set:
                             follow_set -= {''}
                             follow_set |= siguiente(production[0], grammar, start_symbol, terminals)
