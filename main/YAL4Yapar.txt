@@ -1,0 +1,26 @@
+(* Yalex for reading yapars *)
+
+let comment = '/''*'((' '|[^'/'])*)'*''/'
+let lowercase = ['a'-'z']+
+let uppercase = 'I'['A'-'H''J'-'Z']+|['A'-'H''J'-'Z']['A'-'Z']*
+let token = '%''t''o''k''e''n'
+let ignoreflag = 'I''G''N''O''R''E'
+let twodots = ':'
+let semicolon = ';'
+let or = '|'
+let splitter = '%''%'
+let space = [' ''\t']+
+let newline = ['\n']+
+
+rule tokens = 
+  comment            { return COMMENT }
+  | lowercase        { return LOWERCASE }  
+  | uppercase        { return UPPERCASE }
+  | token            { return TOKEN }
+  | ignoreflag       { return IGNOREFLAG }
+  | twodots          { return TWODOTS }	
+  | semicolon        { return SEMICOLON}
+  | or               { return OR }
+  | splitter         { return SPLITTER }
+  | space            { return SPACE }
+  | newline          { return NEWLINE }
